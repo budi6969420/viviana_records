@@ -7,7 +7,7 @@ const Home = () => {
         <div className="main-message">
             <h1>Hey Viviana</h1>
                 <p>
-                    Check out the calendar below to see the moments I’ve written down for each day :)
+                    Check out the calendar below to see the highlights I’ve written down for each day :)
                 </p>
             </div>
         <Calendar/>
