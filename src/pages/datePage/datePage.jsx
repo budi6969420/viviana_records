@@ -41,13 +41,19 @@ const DatePage = () => {
   const { date, description, imageUrl } = record;
 
   const formatDate = (dateStr) => {
-    const [day, month, year] = dateStr.split('-');
-    const dayInt = parseInt(day, 10);
+    const [day, month, year] = dateStr.split('-').map(Number);
+    const date = new Date(year, month - 1, day); // Create a Date object
+  
+    const dayInt = date.getDate();
     const monthNames = [
       'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
-
+    const dayNames = [
+      'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+      'Thursday', 'Friday', 'Saturday'
+    ];
+  
     const getDaySuffix = (day) => {
       if (day >= 11 && day <= 13) return 'th';
       switch (day % 10) {
@@ -57,13 +63,14 @@ const DatePage = () => {
         default: return 'th';
       }
     };
-
+  
     const suffix = getDaySuffix(dayInt);
-    const monthName = monthNames[parseInt(month, 10) - 1];
-
-    return `On the ${dayInt}${suffix} of ${monthName} ${year}`;
+    const dayName = dayNames[date.getDay()];
+    const monthName = monthNames[month - 1];
+  
+    return `${dayName}, ${dayInt}${suffix} of ${monthName} ${year}`;
   };
-
+  
   const handleNavigate = (offset) => {
     const newDate = getAdjacentDate(selectedDate, offset);
     navigate(`/${newDate}`);
@@ -71,7 +78,7 @@ const DatePage = () => {
 
   return (
     <div className="date-page-container">
-      <h1 className="formatted-date">{formatDate(date)}</h1>
+      <h2 className="formatted-date">{formatDate(date)}</h2>
       <div className="main-message">
         {imageUrl && <img src={imageUrl} alt="Event" className="event-image" />}
         <p className="description">{description}</p>
