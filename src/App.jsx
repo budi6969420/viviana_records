@@ -6,7 +6,7 @@ import DatePage from './pages/datePage/datePage';
 
 function App() {
   useEffect(() => {
-    const images = import.meta.glob('/public/backgrounds/*.{jpg,jpeg,png,gif}');
+    const images = import.meta.glob('/dist/assets/*.{jpg,jpeg,png,gif}');
     const imagePaths = Object.keys(images);
 
     const randomImagePath = imagePaths[Math.floor(Math.random() * imagePaths.length)];
