@@ -3,10 +3,12 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './index.css';
 import dataService from '../../services/dataService';
+import { useNavigate } from 'react-router-dom';
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableDays, setAvailableDays] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAvailableDays = async () => {
@@ -20,8 +22,7 @@ const Calendar = () => {
     setSelectedDate(date);
     if (date) {
       const formattedDate = formatDate(date);
-      const newUrl = `${window.location.origin}/${formattedDate}`;
-      window.location.href = newUrl;
+      navigate(formattedDate);
     }
   };
 
