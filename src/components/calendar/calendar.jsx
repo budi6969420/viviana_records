@@ -35,7 +35,12 @@ const Calendar = () => {
 
   const isAvailable = (date) => {
     const formattedDate = formatDate(date);
-    return availableDays.includes(formattedDate);
+    return availableDays.map(d => d.date).includes(formattedDate);
+  };
+
+  const isDate = (date) => {
+    const formattedDate = formatDate(date);
+    return availableDays.some(d => d.date === formattedDate && d.isDate);
   };
 
   return (
@@ -46,9 +51,18 @@ const Calendar = () => {
         inline
         dateFormat="dd-MM-yyyy"
         filterDate={isAvailable}
-        dayClassName={(date) => (isAvailable(date) ? 'available-day' : 'unavailable-day')}
+        dayClassName={(date) => {
+          if (!isAvailable(date)) {
+            return 'unavailable-day';
+          }
+          if (isDate(date)) {
+            return 'available-day is-date';
+          }
+          return 'available-day';
+        }}
       />
-    </div>
+  </div>
+
   );
 };
 
