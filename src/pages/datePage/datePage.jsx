@@ -8,6 +8,7 @@ const DatePage = () => {
   const [record, setRecord] = useState(null);
   const [hasPrevious, setHasPrevious] = useState(false);
   const [hasNext, setHasNext] = useState(false);
+  const [isImageZoomed, setIsImageZoomed] = useState(false); // New state for zoom
   const navigate = useNavigate();
 
   const getAdjacentDate = (dateStr, offset) => {
@@ -36,6 +37,23 @@ const DatePage = () => {
     fetchRecord();
   }, [selectedDate]);
 
+  const handleImageClick = () => {
+    setIsImageZoomed(!isImageZoomed);
+  };
+
+  const handleClickOutsideImage = (event) => {
+    if (!event.target.closest('.event-image') && isImageZoomed) {
+      setIsImageZoomed(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutsideImage);
+    return () => {
+      document.removeEventListener('click', handleClickOutsideImage);
+    };
+  }, [isImageZoomed]);
+
   if (!record) return <div>Loading...</div>;
 
   const { date, description, imageUrl } = record;
@@ -43,7 +61,7 @@ const DatePage = () => {
   const formatDate = (dateStr) => {
     const [day, month, year] = dateStr.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Create a Date object
-  
+
     const dayInt = date.getDate();
     const monthNames = [
       'January', 'February', 'March', 'April', 'May', 'June',
@@ -53,7 +71,7 @@ const DatePage = () => {
       'Sunday', 'Monday', 'Tuesday', 'Wednesday',
       'Thursday', 'Friday', 'Saturday'
     ];
-  
+
     const getDaySuffix = (day) => {
       if (day >= 11 && day <= 13) return 'th';
       switch (day % 10) {
@@ -63,14 +81,14 @@ const DatePage = () => {
         default: return 'th';
       }
     };
-  
+
     const suffix = getDaySuffix(dayInt);
     const dayName = dayNames[date.getDay()];
     const monthName = monthNames[month - 1];
-  
+
     return `${dayName}, ${dayInt}${suffix} of ${monthName} ${year}`;
   };
-  
+
   const handleNavigate = (offset) => {
     const newDate = getAdjacentDate(selectedDate, offset);
     navigate(`/${newDate}`);
@@ -80,7 +98,14 @@ const DatePage = () => {
     <div className="date-page-container">
       <h2 className="formatted-date">{formatDate(date)}</h2>
       <div className="main-message">
-        {imageUrl && <img src={imageUrl} alt="Event" className="event-image" />}
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt="Event"
+            className={`event-image ${isImageZoomed ? 'zoomed' : ''}`}
+            onClick={handleImageClick}
+          />
+        )}
         <p className="description">{description}</p>
       </div>
       <div className="navigation-buttons">
