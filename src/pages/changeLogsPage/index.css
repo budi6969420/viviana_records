@@ -1,0 +1,93 @@
+.changelog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    min-height: 100vh;
+    margin-top: 30%;
+}
+
+.changelog-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.changelog-list {
+    width: 90%;
+    max-width: 750px;
+    background-color: #2d2d2d;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.changelog-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.changelog-item {
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: #383838;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.changelog-item:hover {
+    transform: scale(1.03);
+}
+
+a {
+    text-decoration: none;
+}
+
+.changelog-item a {
+    text-decoration: none;
+}
+
+.commit-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.commit-message {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.commit-date {
+    font-size: 0.95rem;
+    color: #bbb;
+}
+
+.loading {
+    font-size: 1.6rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .changelog-title {
+        font-size: 2rem;
+    }
+
+    .changelog-list {
+        width: 100%;
+    }
+    
+    .changelog-container {
+        margin-top: 110%;
+    }
+}

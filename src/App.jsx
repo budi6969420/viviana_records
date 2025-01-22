@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Home from './pages/home';
+import Home from './pages/homePage/home';
 import DatePage from './pages/datePage/datePage';
+import ChangeLogPage from './pages/changeLogsPage/changeLogsPage';
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/changes" element={<ChangeLogPage />} />
           <Route path="/:selectedDate" element={<DatePage />} />
         </Routes>
       </div>
