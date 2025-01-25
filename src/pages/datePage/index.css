@@ -49,6 +49,11 @@
   font-size: 1.2rem;
   line-height: 1.6;
   color: #fff;
+
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;  
 }
 
 .back-button,
