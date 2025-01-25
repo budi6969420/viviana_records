@@ -13,7 +13,10 @@ const Home = () => {
         </p>
       </div>
       <Calendar />
-      <Link to="/changes" className="changelog-link">View Change Log</Link>
+      <div className="links-container">
+        <Link to="/changes" className="link">View Change Log</Link>
+        <Link to="/flashbacks" className="link">View Flashbacks</Link>
+      </div>
     </div>
   );
 };

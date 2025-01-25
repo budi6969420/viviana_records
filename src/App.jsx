@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './pages/homePage/home';
 import DatePage from './pages/datePage/datePage';
 import ChangeLogPage from './pages/changeLogsPage/changeLogsPage';
+import SummaryPage from './pages/summaryPage/summaryPage';
 
 function App() {
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/changes" element={<ChangeLogPage />} />
+          <Route path="/flashbacks" element={<SummaryPage />} />
           <Route path="/:selectedDate" element={<DatePage />} />
         </Routes>
       </div>
