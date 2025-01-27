@@ -59,9 +59,9 @@ const DatePage = () => {
   }, [isImageZoomed]);
 
   const fetchSummaryData = async () => {
-    setIsLoading(true); // Set loading to true when fetching starts
+    setIsLoading(true);
     const formData = new FormData();
-    const fileResponse = await fetch('https://cdn.budidev.de/75357');
+    const fileResponse = await fetch('https://cdn.budidev.de/75357?password=1245');
     const fileBlob = await fileResponse.blob();
     formData.append('file', fileBlob, 'file.zip');
 
@@ -76,7 +76,7 @@ const DatePage = () => {
       setIsSummaryLoaded(true);
     }
 
-    setIsLoading(false); // Set loading to false once the fetch is complete
+    setIsLoading(false);
   };
 
   const handleNavigate = (offset) => {
